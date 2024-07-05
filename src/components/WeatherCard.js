@@ -1,4 +1,3 @@
-// src/components/WeatherCard.js
 import React from 'react';
 
 const WeatherCard = ({ weatherData }) => {

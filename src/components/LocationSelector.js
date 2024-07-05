@@ -3,12 +3,12 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const LocationSelector = ({ setLocation }) => {
-  const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 }); // Default position (London)
+  const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 }); 
 
   const handleClick = (e) => {
     const { lat, lng } = e.latlng;
     setPosition({ lat, lng });
-    setLocation({ lat, lon: lng }); // Update parent component's location state
+    setLocation({ lat, lon: lng }); 
   };
 
   return (
