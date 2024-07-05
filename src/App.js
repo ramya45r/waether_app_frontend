@@ -1,48 +1,43 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WeatherCard from './components/WeatherCard';
-import HistoricalDataTable from './components/HistoricalDataTable';
-import './styles.css';
+import LocationSelector from './components/LocationSelector';
+import './App.css';
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
-  const [historicalData, setHistoricalData] = useState([]);
-  const [filter, setFilter] = useState({ location: 'Delhi', from: '', to: '' });
+  const [location, setLocation] = useState({ lat: 51.505, lon: -0.09 }); 
 
-  const fetchWeatherData = async (location) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/weather/${location}`);
-      setWeatherData(response.data);
-      fetchHistoricalData(location);
-    } catch (err) {
-      console.error("Error fetching weather data: ", err);
-    }
-  };
-
-  const fetchHistoricalData = async (location) => {
+  const fetchWeatherData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/weather?location=${location}&from=${filter.from}&to=${filter.to}`
+        `${baseUrl}/api/weather/current?lat=${location.lat}&lon=${location.lon}`
       );
-      setHistoricalData(response.data);
-    } catch (err) {
-      console.error("Error fetching historical data: ", err);
+      setWeatherData({
+        location: response.data.location,
+        temperature: response.data.temperature,
+        description: response.data.description,
+        icon: response.data.icon,
+      });
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
     }
   };
 
   useEffect(() => {
-    fetchWeatherData(filter.location);
-  }, [filter.location]);
+    fetchWeatherData();
+  }, [location]);
 
-  useEffect(() => {
-    fetchHistoricalData(filter.location);
-  }, [filter.from, filter.to]);
+  const handleLocationChange = (newLocation) => {
+    setLocation(newLocation);
+  };
 
   return (
     <div className="app">
+      <h1>Weather App</h1>
+      <LocationSelector setLocation={handleLocationChange} />
       <WeatherCard weatherData={weatherData} />
-      <HistoricalDataTable historicalData={historicalData} filter={filter} setFilter={setFilter} />
     </div>
   );
 };

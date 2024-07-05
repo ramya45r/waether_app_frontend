@@ -1,3 +1,4 @@
+// src/components/WeatherCard.js
 import React from 'react';
 
 const WeatherCard = ({ weatherData }) => {
@@ -6,9 +7,13 @@ const WeatherCard = ({ weatherData }) => {
   return (
     <div className="weather-card">
       <h2>{location}</h2>
-      <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt={description} />
-      <h3>{temperature}°C</h3>
-      <p>{description}</p>
+      <div>
+        <img src={`http://openweathermap.org/img/w/${icon}.png`} alt="Weather Icon" />
+        <span>{description}</span>
+      </div>
+      <div>
+        <h3>{temperature}&deg;C</h3>
+      </div>
     </div>
   );
 };
