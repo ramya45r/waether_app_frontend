@@ -1,0 +1,55 @@
+/* src/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .app {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .weather-card, .historical-data {
+    margin-bottom: 20px;
+  }
+  
+  .weather-card h2, .historical-data h2 {
+    margin-top: 0;
+  }
+  
+  .filters {
+    margin-bottom: 10px;
+  }
+  
+  .filters label {
+    margin-right: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f9f9f9;
+  }
+  
